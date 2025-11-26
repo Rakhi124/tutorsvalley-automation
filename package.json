@@ -1,0 +1,22 @@
+{
+  "name": "tutorsvalley-automation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run --reporter mochawesome --reporter-options reportDir=reports,overwrite=false,html=false,json=true",
+    "merge-reports": "mochawesome-merge reports/*.json > reports/merged.json && marge reports/merged.json -f index -o reports/html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "cypress": "^15.7.0",
+    "cypress-file-upload": "^5.0.8",
+    "mochawesome": "^7.1.4",
+    "mochawesome-merge": "^5.1.0",
+    "mochawesome-report-generator": "^6.3.2"
+  }
+}

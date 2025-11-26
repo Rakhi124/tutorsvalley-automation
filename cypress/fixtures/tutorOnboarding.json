@@ -1,0 +1,36 @@
+{
+  "basicDetails": {
+    "fullName": "Automation Tutor",
+    "dob": "1990-05-10",
+    "gender": "Female",
+    "nationality": "India",
+    "languages": ["English", "Malayalam"]
+  },
+  "contactDetails": {
+    "address": "12 MG Road",
+    "country": "India",
+    "state": "Kerala",
+    "city": "Thiruvananthapuram",
+    "postalCode": "695001",
+    "email": "demo.tutor.tutorsvalley@gmail.com",
+    "mobile": "+919876543210"
+  },
+  "courses": [
+    { "name": "Mathematics", "levels": ["KS1", "KS2"] },
+    { "name": "English", "levels": ["KS2"] }
+  ],
+  "about": {
+    "headline": "Experienced Math Tutor",
+    "bio": "5+ years teaching",
+    "resume": "files/resume-sample.pdf",
+    "dbs": "files/dbs-sample.pdf"
+  },
+  "availability": {
+    "timezone": "Asia/Kolkata",
+    "slots": [
+      { "day": "Monday", "from": "10:00", "to": "12:00" },
+      { "day": "Wednesday", "from": "18:00", "to": "20:00" }
+    ],
+    "rate": "15"
+  }
+}
