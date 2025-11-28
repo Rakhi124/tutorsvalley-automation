@@ -1,0 +1,282 @@
+{
+  "stats": {
+    "suites": 2,
+    "tests": 7,
+    "passes": 2,
+    "pending": 0,
+    "failures": 5,
+    "testsRegistered": 7,
+    "passPercent": 28.571428571428573,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false,
+    "start": "2025-11-27T09:18:36.965Z",
+    "end": "2025-11-27T09:19:11.032Z",
+    "duration": 34067
+  },
+  "results": [
+    {
+      "uuid": "1c1671bc-7a5c-4b40-979a-f4c71eb8b9b3",
+      "title": "",
+      "fullFile": "cypress\\e2e\\login\\tutorLogin.cy.js",
+      "file": "cypress\\e2e\\login\\tutorLogin.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "4a60b7a4-8f9f-423e-a8a9-0045ef42ec69",
+          "title": "Tutor Login Flow",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "should login tutor, accept modal & verify dashboard & store token",
+              "fullTitle": "Tutor Login Flow should login tutor, accept modal & verify dashboard & store token",
+              "timedOut": null,
+              "duration": 9000,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": "{\n  \"title\": \"cypress-mochawesome-reporter-videos-passed\",\n  \"value\": \"cypress\\\\e2e\\\\login\\\\tutorLogin.cy.js\"\n}",
+              "code": "// Intercept login API\ncy.intercept('POST', '/api/v1/login').as('tutorLogin');\n// Perform UI Login\n_loginPage.loginPage.login(this.creds.email, this.creds.password);\ncy.wait('@tutorLogin').its('response.statusCode').should('eq', 200);\n// Ensure T&C Modal is visible\ncy.get('.modal-content', {\n  timeout: 10000\n}).should('be.visible');\n// Scroll & Click \"I Agree\" Button\ncy.contains('button', 'I Agree').scrollIntoView().should('be.visible').click();\n// Verify redirected to Tutor Dashboard\ncy.url().should('include', '/tutor');\n// Verify Welcome message\ncy.contains('Welcome, DEMO.TUTOR', {\n  timeout: 10000\n}).should('be.visible');\n// Verify Token in LocalStorage\ncy.verifyToken();",
+              "err": {},
+              "uuid": "6a5cbdcb-767e-4436-84d9-f55a40a0baad",
+              "parentUUID": "4a60b7a4-8f9f-423e-a8a9-0045ef42ec69",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should fail login with invalid password",
+              "fullTitle": "Tutor Login Flow should fail login with invalid password",
+              "timedOut": null,
+              "duration": 5875,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": "{\n  \"title\": \"cypress-mochawesome-reporter-videos-passed\",\n  \"value\": \"cypress\\\\e2e\\\\login\\\\tutorLogin.cy.js\"\n}",
+              "code": "cy.intercept('POST', '/api/v1/login').as('loginFail');\n_loginPage.loginPage.login(this.creds.email, 'wrongpassword');\ncy.wait('@loginFail').its('response.statusCode').should('eq', 400);\ncy.contains('Invalid login credentials').should('be.visible');\ncy.url().should('include', '/login');",
+              "err": {},
+              "uuid": "8d6ed470-72bf-406a-a275-cbdc7d487a2a",
+              "parentUUID": "4a60b7a4-8f9f-423e-a8a9-0045ef42ec69",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "6a5cbdcb-767e-4436-84d9-f55a40a0baad",
+            "8d6ed470-72bf-406a-a275-cbdc7d487a2a"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 14875,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "7dd01d40-6915-4e9c-8cff-8d9b906c8f00",
+      "title": "",
+      "fullFile": "cypress\\e2e\\tutor\\tutorOnboardingFull.cy.js",
+      "file": "cypress\\e2e\\tutor\\tutorOnboardingFull.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "8b1ee018-0dcd-436a-98fd-273272d50e6a",
+          "title": "Tutor Onboarding – Full Workflow Test Suite",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC01 – Should complete Tutor Onboarding End-to-End Successfully",
+              "fullTitle": "Tutor Onboarding – Full Workflow Test Suite TC01 – Should complete Tutor Onboarding End-to-End Successfully",
+              "timedOut": null,
+              "duration": 1056,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": "[\n  {\n    \"title\": \"cypress-mochawesome-reporter-videos-failed\",\n    \"value\": \"cypress\\\\e2e\\\\tutor\\\\tutorOnboardingFull.cy.js\"\n  },\n  {\n    \"title\": \"cypress-mochawesome-reporter-screenshots\",\n    \"value\": [\n      [\n        \"\\\\tutor\\\\tutorOnboardingFull.cy.js\\\\Tutor Onboarding – Full Workflow Test Suite -- TC01 – Should complete Tutor Onboarding End-to-End Successfully (failed).png\"\n      ],\n      [\n        \"\\\\tutor\\\\tutorOnboardingFull.cy.js\\\\Tutor Onboarding – Full Workflow Test Suite -- TC01 – Should complete Tutor Onboarding End-to-End Successfully (failed) (attempt 2).png\"\n      ]\n    ]\n  }\n]",
+              "code": "cy.log('STEP 1: Navigate to Tutor Registration');\n_loginPage.default.navigateToTutorRegistration();\ncy.log('STEP 2: Basic Details');\n_onboardingPage.default.fillBasicDetails(this.data.basic);\ncy.log('STEP 3: Contact Details');\n_onboardingPage.default.fillContactDetails(this.data.contact);\ncy.log('STEP 4: Course Selection');\n_onboardingPage.default.selectCourse('IT Courses');\ncy.get('.selected-course-chip').should('contain', 'IT Courses');\n_onboardingPage.default.next();\ncy.log('STEP 5: About Me');\n_onboardingPage.default.fillAboutText(this.data.about);\n_onboardingPage.default.next();\ncy.log('STEP 6: Availability & Rates');\n_onboardingPage.default.addAvailability('Sunday', '10:00 AM', '03:00 PM');\ncy.contains('Sunday').should('exist');\n_onboardingPage.default.next();\ncy.log('STEP 7: Qualification Upload');\n_onboardingPage.default.uploadResume('cypress/fixtures/files/sampleResume.docx');\ncy.contains('.docx').should('exist');\n_onboardingPage.default.next();\ncy.log('STEP 8: Password');\n_onboardingPage.default.setPassword(this.data.password);\n_onboardingPage.default.submit();\ncy.log('ASSERTION: Redirected to Dashboard');\ncy.url().should('include', '/dashboard');\ncy.contains('Dashboard').should('be.visible');",
+              "err": {
+                "message": "TypeError: Cannot read properties of undefined (reading 'navigateToTutorRegistration')",
+                "estack": "TypeError: Cannot read properties of undefined (reading 'navigateToTutorRegistration')\n    at Context.eval (webpack://tutorsvalley-automation/./cypress/e2e/tutor/tutorOnboardingFull.cy.js:19:16)\n    at runnable.fn (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:146081:19)\n    at callFn (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:165175:21)\n    at Runnable.run (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:165162:7)\n    at <unknown> (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:171257:30)\n    at PassThroughHandlerContext.finallyHandler (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:4042:23)\n    at PassThroughHandlerContext.tryCatcher (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:1777:23)\n    at Promise._settlePromiseFromHandler (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:1489:31)\n    at Promise._settlePromise (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:1546:18)",
+                "diff": null
+              },
+              "uuid": "a1cf1cf5-04c4-4fe8-93c1-e91a260ecb96",
+              "parentUUID": "8b1ee018-0dcd-436a-98fd-273272d50e6a",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC02 – Should display validation errors when basic details are empty",
+              "fullTitle": "Tutor Onboarding – Full Workflow Test Suite TC02 – Should display validation errors when basic details are empty",
+              "timedOut": null,
+              "duration": 745,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": "[\n  {\n    \"title\": \"cypress-mochawesome-reporter-videos-failed\",\n    \"value\": \"cypress\\\\e2e\\\\tutor\\\\tutorOnboardingFull.cy.js\"\n  },\n  {\n    \"title\": \"cypress-mochawesome-reporter-screenshots\",\n    \"value\": [\n      [\n        \"\\\\tutor\\\\tutorOnboardingFull.cy.js\\\\Tutor Onboarding – Full Workflow Test Suite -- TC02 – Should display validation errors when basic details are empty (failed).png\"\n      ],\n      [\n        \"\\\\tutor\\\\tutorOnboardingFull.cy.js\\\\Tutor Onboarding – Full Workflow Test Suite -- TC02 – Should display validation errors when basic details are empty (failed) (attempt 2).png\"\n      ]\n    ]\n  }\n]",
+              "code": "_loginPage.default.navigateToTutorRegistration();\ncy.log('Click Next without entering details');\ncy.get('button[data-testid=\"next-btn\"]').click();\ncy.contains('First Name is required').should('be.visible');\ncy.contains('Email is required').should('be.visible');\ncy.contains('Last Name is required').should('be.visible');",
+              "err": {
+                "message": "TypeError: Cannot read properties of undefined (reading 'navigateToTutorRegistration')",
+                "estack": "TypeError: Cannot read properties of undefined (reading 'navigateToTutorRegistration')\n    at Context.eval (webpack://tutorsvalley-automation/./cypress/e2e/tutor/tutorOnboardingFull.cy.js:60:16)\n    at runnable.fn (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:146081:19)\n    at callFn (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:165175:21)\n    at Runnable.run (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:165162:7)\n    at <unknown> (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:171257:30)\n    at PassThroughHandlerContext.finallyHandler (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:4042:23)\n    at PassThroughHandlerContext.tryCatcher (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:1777:23)\n    at Promise._settlePromiseFromHandler (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:1489:31)\n    at Promise._settlePromise (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:1546:18)",
+                "diff": null
+              },
+              "uuid": "dfcc71a5-81f8-490c-baf0-444101d19a60",
+              "parentUUID": "8b1ee018-0dcd-436a-98fd-273272d50e6a",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC03 – Invalid Email Format Validation",
+              "fullTitle": "Tutor Onboarding – Full Workflow Test Suite TC03 – Invalid Email Format Validation",
+              "timedOut": null,
+              "duration": 775,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": "[\n  {\n    \"title\": \"cypress-mochawesome-reporter-videos-failed\",\n    \"value\": \"cypress\\\\e2e\\\\tutor\\\\tutorOnboardingFull.cy.js\"\n  },\n  {\n    \"title\": \"cypress-mochawesome-reporter-screenshots\",\n    \"value\": [\n      [\n        \"\\\\tutor\\\\tutorOnboardingFull.cy.js\\\\Tutor Onboarding – Full Workflow Test Suite -- TC03 – Invalid Email Format Validation (failed).png\"\n      ],\n      [\n        \"\\\\tutor\\\\tutorOnboardingFull.cy.js\\\\Tutor Onboarding – Full Workflow Test Suite -- TC03 – Invalid Email Format Validation (failed) (attempt 2).png\"\n      ]\n    ]\n  }\n]",
+              "code": "_loginPage.default.navigateToTutorRegistration();\ncy.get('input[name=\"email\"]').type(\"abc\");\ncy.get('button[data-testid=\"next-btn\"]').click();\ncy.contains('Enter a valid email').should('be.visible');",
+              "err": {
+                "message": "TypeError: Cannot read properties of undefined (reading 'navigateToTutorRegistration')",
+                "estack": "TypeError: Cannot read properties of undefined (reading 'navigateToTutorRegistration')\n    at Context.eval (webpack://tutorsvalley-automation/./cypress/e2e/tutor/tutorOnboardingFull.cy.js:71:16)\n    at runnable.fn (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:146081:19)\n    at callFn (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:165175:21)\n    at Runnable.run (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:165162:7)\n    at <unknown> (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:171257:30)\n    at PassThroughHandlerContext.finallyHandler (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:4042:23)\n    at PassThroughHandlerContext.tryCatcher (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:1777:23)\n    at Promise._settlePromiseFromHandler (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:1489:31)\n    at Promise._settlePromise (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:1546:18)",
+                "diff": null
+              },
+              "uuid": "3e3a8320-d776-465d-b646-447812c7a3c0",
+              "parentUUID": "8b1ee018-0dcd-436a-98fd-273272d50e6a",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC04 – Contact details cannot proceed without phone number",
+              "fullTitle": "Tutor Onboarding – Full Workflow Test Suite TC04 – Contact details cannot proceed without phone number",
+              "timedOut": null,
+              "duration": 784,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": "[\n  {\n    \"title\": \"cypress-mochawesome-reporter-videos-failed\",\n    \"value\": \"cypress\\\\e2e\\\\tutor\\\\tutorOnboardingFull.cy.js\"\n  },\n  {\n    \"title\": \"cypress-mochawesome-reporter-screenshots\",\n    \"value\": [\n      [\n        \"\\\\tutor\\\\tutorOnboardingFull.cy.js\\\\Tutor Onboarding – Full Workflow Test Suite -- TC04 – Contact details cannot proceed without phone number (failed).png\"\n      ],\n      [\n        \"\\\\tutor\\\\tutorOnboardingFull.cy.js\\\\Tutor Onboarding – Full Workflow Test Suite -- TC04 – Contact details cannot proceed without phone number (failed) (attempt 2).png\"\n      ]\n    ]\n  }\n]",
+              "code": "_loginPage.default.navigateToTutorRegistration();\n_onboardingPage.default.fillBasicDetails(this.data.basic);\ncy.get('button[data-testid=\"next-btn\"]').click();\ncy.contains('Phone number is required').should('be.visible');",
+              "err": {
+                "message": "TypeError: Cannot read properties of undefined (reading 'navigateToTutorRegistration')",
+                "estack": "TypeError: Cannot read properties of undefined (reading 'navigateToTutorRegistration')\n    at Context.eval (webpack://tutorsvalley-automation/./cypress/e2e/tutor/tutorOnboardingFull.cy.js:79:16)\n    at runnable.fn (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:146081:19)\n    at callFn (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:165175:21)\n    at Runnable.run (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:165162:7)\n    at <unknown> (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:171257:30)\n    at PassThroughHandlerContext.finallyHandler (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:4042:23)\n    at PassThroughHandlerContext.tryCatcher (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:1777:23)\n    at Promise._settlePromiseFromHandler (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:1489:31)\n    at Promise._settlePromise (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:1546:18)",
+                "diff": null
+              },
+              "uuid": "70423bc7-e6a5-4079-99a3-3dbcc32d0fae",
+              "parentUUID": "8b1ee018-0dcd-436a-98fd-273272d50e6a",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC05 – Error If Password And Confirm Password Do Not Match",
+              "fullTitle": "Tutor Onboarding – Full Workflow Test Suite TC05 – Error If Password And Confirm Password Do Not Match",
+              "timedOut": null,
+              "duration": 711,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": "[\n  {\n    \"title\": \"cypress-mochawesome-reporter-videos-failed\",\n    \"value\": \"cypress\\\\e2e\\\\tutor\\\\tutorOnboardingFull.cy.js\"\n  },\n  {\n    \"title\": \"cypress-mochawesome-reporter-screenshots\",\n    \"value\": [\n      [\n        \"\\\\tutor\\\\tutorOnboardingFull.cy.js\\\\Tutor Onboarding – Full Workflow Test Suite -- TC05 – Error If Password And Confirm Password Do Not Match (failed).png\"\n      ],\n      [\n        \"\\\\tutor\\\\tutorOnboardingFull.cy.js\\\\Tutor Onboarding – Full Workflow Test Suite -- TC05 – Error If Password And Confirm Password Do Not Match (failed) (attempt 2).png\"\n      ]\n    ]\n  }\n]",
+              "code": "_loginPage.default.navigateToTutorRegistration();\n_onboardingPage.default.fillBasicDetails(this.data.basic);\n_onboardingPage.default.fillContactDetails(this.data.contact);\n_onboardingPage.default.selectCourse('IT Courses');\n_onboardingPage.default.next();\n_onboardingPage.default.fillAboutText(this.data.about);\n_onboardingPage.default.next();\n_onboardingPage.default.addAvailability('Sunday', '10:00 AM', '03:00 PM');\n_onboardingPage.default.next();\n_onboardingPage.default.uploadResume('cypress/fixtures/files/sampleResume.docx');\n_onboardingPage.default.next();\n_onboardingPage.default.elements.password().type('Test@123');\n_onboardingPage.default.elements.confirmPassword().type('Test@321');\n_onboardingPage.default.elements.submitBtn().click();\ncy.contains('Passwords do not match').should('be.visible');",
+              "err": {
+                "message": "TypeError: Cannot read properties of undefined (reading 'navigateToTutorRegistration')",
+                "estack": "TypeError: Cannot read properties of undefined (reading 'navigateToTutorRegistration')\n    at Context.eval (webpack://tutorsvalley-automation/./cypress/e2e/tutor/tutorOnboardingFull.cy.js:88:16)\n    at runnable.fn (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:146081:19)\n    at callFn (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:165175:21)\n    at Runnable.run (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:165162:7)\n    at <unknown> (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:171257:30)\n    at PassThroughHandlerContext.finallyHandler (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:4042:23)\n    at PassThroughHandlerContext.tryCatcher (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:1777:23)\n    at Promise._settlePromiseFromHandler (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:1489:31)\n    at Promise._settlePromise (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:1546:18)",
+                "diff": null
+              },
+              "uuid": "d73bde86-953c-4d5a-b13a-1ca37eb74bfe",
+              "parentUUID": "8b1ee018-0dcd-436a-98fd-273272d50e6a",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "a1cf1cf5-04c4-4fe8-93c1-e91a260ecb96",
+            "dfcc71a5-81f8-490c-baf0-444101d19a60",
+            "3e3a8320-d776-465d-b646-447812c7a3c0",
+            "70423bc7-e6a5-4079-99a3-3dbcc32d0fae",
+            "d73bde86-953c-4d5a-b13a-1ca37eb74bfe"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 4071,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "charts": true,
+        "reportPageTitle": "TutorsValley Automation Report",
+        "embeddedScreenshots": true,
+        "inlineAssets": true,
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "reportDir": "cypress\\reports\\html\\.jsons"
+      },
+      "version": "6.3.2"
+    }
+  }
+}

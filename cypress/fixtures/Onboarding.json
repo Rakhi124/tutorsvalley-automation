@@ -1,0 +1,32 @@
+{
+  "basic": {
+    "firstName": "John",
+    "lastName": "Tutor",
+    "email":"tutor@gmail.com",
+    "dob": "1992-06-18",
+    "gender": "Male",
+    "nationality": "Indian",
+    "languages": ["English", "Hindi"]
+  },
+  "contact": {
+    "address": "Test Street, Bangalore",
+    "country": "India",
+    "state": "Karnataka",
+    "city": "Bangalore",
+    "postalCode": "560100",
+    "mobile": "9000000000"
+  },
+  "about": {
+    "headline": "Automation & Selenium Tutor",
+    "bio": "10 years of teaching experience",
+    "resume": "files/resume.pdf",
+    "dbs": "files/dbs.pdf"
+  },
+  "availability": {
+    "timezone": "Asia/Kolkata",
+    "rate": "1200",
+    "slots": [
+      { "day": "Monday", "from": "09:00", "to": "11:00" }
+    ]
+  }
+}

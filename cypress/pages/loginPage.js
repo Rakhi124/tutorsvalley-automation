@@ -1,7 +1,10 @@
 class LoginPage {
   visit() { cy.visit('/login') }
+  emailInput() {
+    return cy.get('form').find('input[name="email"]:visible')
+  }
 
-  emailInput() { return cy.get('input[type="email"]') }
+  //emailInput() { return cy.get('input[type="email"]') }
   passwordInput() { return cy.get('input[type="password"]') }
   submitBtn() { return cy.get('button[type="submit"], button:contains("Login")').first() }
 
