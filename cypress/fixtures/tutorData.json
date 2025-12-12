@@ -1,0 +1,114 @@
+{
+  
+  "step1": {
+    "valid": {
+      "firstName": "John",
+      "lastName": "Mathew",
+      "email": "john.mathew+auto@test.com",
+      "photo": "files/sample-avatar.png"
+    }
+  },
+
+  "step2": {
+    "valid": {
+      "country": "United Kingdom",
+      "zipCode": "SW1A1AA",
+      "phone": "9876543210"
+    }
+  },
+
+  "basicDetailsNegative": [
+    {
+      "description": "should NOT allow progressing without uploading profile picture",
+      "firstName": "John",
+      "lastName": "Doe",
+      "email": "john@test.com",
+      "photo": "",
+      "expectedError": "Profile photo is required"
+    },
+    {
+      "description": "should show error when First Name is empty",
+      "firstName": "",
+      "lastName": "Doe",
+      "email": "john@test.com",
+      "expectedError": "First Name is required"
+    },
+    {
+      "description": "should reject First Name with numbers",
+      "firstName": "12345",
+      "lastName": "Doe",
+      "email": "john@test.com",
+      "expectedError": "Invalid first name"
+    },
+    {
+      "description": "should reject First Name with special characters",
+      "firstName": "@#$%",
+      "lastName": "Doe",
+      "email": "john@test.com",
+      "expectedError": "Invalid first name"
+    },
+    {
+      "description": "should reject First Name shorter than minimum length",
+      "firstName": "J",
+      "lastName": "Doe",
+      "email": "john@test.com",
+      "expectedError": "First name is too short"
+    },
+    {
+      "description": "should show error when Last Name is empty",
+      "firstName": "John",
+      "lastName": "",
+      "email": "john@test.com",
+      "expectedError": "Last Name is required."
+    },
+    {
+      "description": "should reject Last Name with numbers",
+      "firstName": "John",
+      "lastName": "12345",
+      "email": "john@test.com",
+      "expectedError": "Invalid last name"
+    },
+    {
+      "description": "should reject Last Name with special characters",
+      "firstName": "John",
+      "lastName": "!@#$%",
+      "email": "john@test.com",
+      "expectedError": "Invalid last name"
+    },
+    {
+      "description": "should reject invalid email (missing @)",
+      "firstName": "John",
+      "lastName": "Doe",
+      "email": "invalidEmail",
+      "expectedError": "Email is not valid."
+    },
+    {
+      "description": "should reject invalid email (missing domain)",
+      "firstName": "John",
+      "lastName": "Doe",
+      "email": "test@",
+      "expectedError": "Email is not valid."
+    },
+    {
+      "description": "should reject invalid email (missing extension)",
+      "firstName": "John",
+      "lastName": "Doe",
+      "email": "abc@test",
+      "expectedError": "Email is not valid."
+    },
+    {
+      "description": "should reject already registered email",
+      "firstName": "John",
+      "lastName": "Doe",
+      "email": "existinguser@test.com",
+      "expectedError": "Email already exists"
+    },
+    {
+      "description": "should show error when required fields are missing",
+      "country": "United Kingdom",
+      "zipCode": "SW1A1AA",
+      "phone": "9876543210",
+      "expectedError": "Required fields are missing"
+    }
+  ]
+}

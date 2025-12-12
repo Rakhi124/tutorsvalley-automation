@@ -24,7 +24,7 @@ Cypress.Commands.add('visitLogin', () => {
   cy.visit('/login'); // Uses baseUrl from config
 });
 
-// 🔥 Tutor Login using UI (Stable)
+//  Tutor Login using UI (Stable)
 Cypress.Commands.add('loginTutorUI', (email, password) => {
   cy.visit('/login');
 
@@ -99,4 +99,97 @@ Cypress.Commands.add('verifyToken', () => {
     // Store token for later API usage
     Cypress.env('tutorToken', token);
   });
+});
+Cypress.Commands.add('clickInside', (selector, xOffset, yOffset) => {
+  cy.get(selector).then($el => {
+    const rect = $el[0].getBoundingClientRect()
+    const x = rect.left + xOffset
+    const y = rect.top + yOffset
+
+    cy.wrap($el).click(x, y, { force: true })
+  })
+})
+Cypress.Commands.add("clearAndType", (selector, text) => {
+  cy.get(selector).should("be.visible").clear().type(text);
+});
+
+Cypress.Commands.add("selectDropdown", (selector, option) => {
+  cy.get(selector).click();
+  cy.contains(option).should("be.visible").click({ force: true });
+});
+
+Cypress.Commands.add("assertText", (selector, expected) => {
+  cy.get(selector)
+    .should("exist")
+    .and("be.visible")
+    .and("have.text", expected);
+});
+
+import 'cypress-file-upload';
+
+Cypress.Commands.add("assertElementVisible", (selector) => {
+    cy.get(selector).should("be.visible").and("not.be.disabled");
+});
+// Clear & type safely
+Cypress.Commands.add('clearAndType', (selector, text) => {
+    cy.get(selector)
+        .clear({ force: true })
+        .type(text, { force: true })
+        .should('have.value', text);
+});
+
+// Click Next (reusable)
+Cypress.Commands.add('clickNext', () => {
+    cy.get('button.next-btn')
+        .should('be.visible')
+        .and('not.be.disabled')
+        .click({ force: true });
+});
+
+// Validate error message
+Cypress.Commands.add('shouldShowError', (message) => {
+    cy.contains(message)
+        .should('exist')
+        .and('be.visible');
+});
+// -----------------------
+// Tutor Onboarding Commands
+// -----------------------
+
+Cypress.Commands.add('selectCountry', (countryName) => {
+    cy.get('button[data-testid="rfs-btn"]').click();
+    cy.contains('li', countryName).click();
+});
+
+Cypress.Commands.add('enterZipCode', (zip) => {
+    cy.get('input[name="zipCode"]').clear().type(zip);
+
+    // Optional: wait for auto-fill API
+    cy.intercept('GET', '**/zip*').as('zipLookup');
+    cy.wait('@zipLookup', { timeout: 8000 });
+});
+
+Cypress.Commands.add('enterPhone', (phone) => {
+    cy.get('input[name="phone"]').clear().type(phone);
+});
+
+Cypress.Commands.add('assertAutoFilledAddress', () => {
+    cy.get('input[name="state"]').should('not.be.empty');
+    cy.get('input[name="city"]').should('not.be.empty');
+});
+
+// Fills entire contact details page
+Cypress.Commands.add('fillContactDetails', (data) => {
+    cy.selectCountry(data.country);
+    
+    cy.enterZipCode(data.zipCode);
+
+    cy.assertAutoFilledAddress();
+
+    cy.enterPhone(data.phone);
+});
+
+// Click Next button on onboarding step
+Cypress.Commands.add('clickNext', () => {
+    cy.get('button').contains('Next').click();
 });

@@ -1,0 +1,95 @@
+{
+  "stats": {
+    "suites": 0,
+    "tests": 1,
+    "passes": 0,
+    "pending": 0,
+    "failures": 1,
+    "start": "2025-12-11T05:45:09.418Z",
+    "end": "2025-12-11T05:45:09.764Z",
+    "duration": 346,
+    "testsRegistered": 1,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "ec2b2764-c48b-403b-ad41-e0a08279ab24",
+      "title": "",
+      "fullFile": "cypress\\e2e\\tutor\\step1_negative.cy.js",
+      "file": "cypress\\e2e\\tutor\\step1_negative.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [
+        {
+          "title": "An uncaught error was detected outside of a test",
+          "fullTitle": "An uncaught error was detected outside of a test",
+          "timedOut": null,
+          "duration": 281,
+          "state": "failed",
+          "speed": null,
+          "pass": false,
+          "fail": true,
+          "pending": false,
+          "context": "[\n  {\n    \"title\": \"cypress-mochawesome-reporter-videos-failed\",\n    \"value\": \"cypress\\\\e2e\\\\tutor\\\\step1_negative.cy.js\"\n  },\n  {\n    \"title\": \"cypress-mochawesome-reporter-screenshots\",\n    \"value\": [\n      [\n        \"\\\\step1_negative.cy.js\\\\An uncaught error was detected outside of a test (failed)-1765431909689.png\"\n      ]\n    ]\n  }\n]",
+          "code": "throw err;",
+          "err": {
+            "message": "TypeError: The following error originated from your test code, not from Cypress.\n\n  > Test argument \"title\" should be a string. Received type \"undefined\"\n\nWhen Cypress detects uncaught errors originating from your test code it will automatically fail the current test.\n\nCypress could not associate this error to any specific test.\n\nWe dynamically generated a new test to display this failure.",
+            "estack": "TypeError: The following error originated from your test code, not from Cypress.\n\n  > Test argument \"title\" should be a string. Received type \"undefined\"\n\nWhen Cypress detects uncaught errors originating from your test code it will automatically fail the current test.\n\nCypress could not associate this error to any specific test.\n\nWe dynamically generated a new test to display this failure.\n    at createInvalidArgumentTypeError (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:162659:13)\n    at new Test (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:169043:11)\n    at context.it.context.specify (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:168984:18)\n    at createRunnable (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:152936:31)\n    at <unknown> (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:152997:14)\n    at eval (webpack://tutorsvalley-automation/./cypress/e2e/tutor/step1_negative.cy.js:13:8)\n    at Array.forEach (<anonymous>)\n    at Suite.eval (webpack://tutorsvalley-automation/./cypress/e2e/tutor/step1_negative.cy.js:12:34)\n    at Object.create (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:169252:19)\n    at context.describe.context.context (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:168939:27)\n    at createRunnable (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:152936:31)\n    at <unknown> (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:152997:14)\n    at eval (webpack://tutorsvalley-automation/./cypress/e2e/tutor/step1_negative.cy.js:4:0)\n    at eval (https://beta.tutorsvalley.com/__cypress/tests?p=cypress\\e2e\\tutor\\step1_negative.cy.js:192:3)\n    at eval (https://beta.tutorsvalley.com/__cypress/tests?p=cypress\\e2e\\tutor\\step1_negative.cy.js:194:12)\n    at eval (<anonymous>)\n    at <unknown> (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:113681:23)\n    at tryCatcher (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:1777:23)\n    at Object.gotValue (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:6446:18)\n    at Object.gotAccum (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:6435:25)\n    at Object.tryCatcher (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:1777:23)\n    at Promise._settlePromiseFromHandler (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:1489:31)",
+            "diff": null
+          },
+          "uuid": "999bbe3f-68fc-494d-9321-adf8744c0bb6",
+          "parentUUID": "ec2b2764-c48b-403b-ad41-e0a08279ab24",
+          "isHook": false,
+          "skipped": false
+        }
+      ],
+      "suites": [],
+      "passes": [],
+      "failures": [
+        "999bbe3f-68fc-494d-9321-adf8744c0bb6"
+      ],
+      "pending": [],
+      "skipped": [],
+      "duration": 281,
+      "root": true,
+      "rootEmpty": false,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress\\reports\\mochawesome\\.jsons",
+        "charts": true,
+        "reportPageTitle": "TutorsValley Automation Report",
+        "embeddedScreenshots": true,
+        "inlineAssets": true,
+        "saveJson": true,
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.3.2"
+    }
+  }
+}

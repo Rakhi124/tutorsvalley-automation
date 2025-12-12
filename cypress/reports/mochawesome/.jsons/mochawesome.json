@@ -1,0 +1,160 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 0,
+    "pending": 0,
+    "failures": 3,
+    "start": "2025-12-11T05:44:23.952Z",
+    "end": "2025-12-11T05:44:45.187Z",
+    "duration": 21235,
+    "testsRegistered": 3,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "56f1e6d7-8f88-4674-9e99-d898ff12f72d",
+      "title": "",
+      "fullFile": "cypress\\e2e\\tutor\\contactDetails_negative.cy.js",
+      "file": "cypress\\e2e\\tutor\\contactDetails_negative.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "7b4c2ef9-a520-4b38-a0ab-c5b9546307dd",
+          "title": "Tutor Onboarding - Contact Details (Negative)",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Should show error if country not selected",
+              "fullTitle": "Tutor Onboarding - Contact Details (Negative) Should show error if country not selected",
+              "timedOut": null,
+              "duration": 8393,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": "[\n  {\n    \"title\": \"cypress-mochawesome-reporter-videos-failed\",\n    \"value\": \"cypress\\\\e2e\\\\tutor\\\\contactDetails_negative.cy.js\"\n  },\n  {\n    \"title\": \"cypress-mochawesome-reporter-screenshots\",\n    \"value\": [\n      [\n        \"\\\\contactDetails_negative.cy.js\\\\Tutor Onboarding - Contact Details (Negative) -- Should show error if country not selected (failed)-1765431872335.png\"\n      ]\n    ]\n  }\n]",
+              "code": "cy.enterZipCode('12345');\ncy.enterPhone('9876543210');\ncy.clickNext();\ncy.contains('Country is required').should('be.visible');",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `input[name=\"zipCode\"]`, but never found it.",
+                "estack": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `input[name=\"zipCode\"]`, but never found it.\n    at Context.eval (webpack://tutorsvalley-automation/./cypress/support/commands.js:165:7)\n    at wrapped (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:145810:43)",
+                "diff": null
+              },
+              "uuid": "f60b340c-b9f1-4d43-9696-07c61a932716",
+              "parentUUID": "7b4c2ef9-a520-4b38-a0ab-c5b9546307dd",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Should validate invalid zip code",
+              "fullTitle": "Tutor Onboarding - Contact Details (Negative) Should validate invalid zip code",
+              "timedOut": null,
+              "duration": 7085,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": "[\n  {\n    \"title\": \"cypress-mochawesome-reporter-videos-failed\",\n    \"value\": \"cypress\\\\e2e\\\\tutor\\\\contactDetails_negative.cy.js\"\n  },\n  {\n    \"title\": \"cypress-mochawesome-reporter-screenshots\",\n    \"value\": [\n      [\n        \"\\\\contactDetails_negative.cy.js\\\\Tutor Onboarding - Contact Details (Negative) -- Should validate invalid zip code (failed)-1765431879614.png\"\n      ]\n    ]\n  }\n]",
+              "code": "cy.selectCountry('India');\ncy.enterZipCode('00000');\ncy.get('input[name=\"state\"]').should('have.value', '');\ncy.get('input[name=\"city\"]').should('have.value', '');\ncy.contains('Invalid postal code').should('be.visible');",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `button[data-testid=\"rfs-btn\"]`, but never found it.",
+                "estack": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `button[data-testid=\"rfs-btn\"]`, but never found it.\n    at Context.eval (webpack://tutorsvalley-automation/./cypress/support/commands.js:160:7)\n    at wrapped (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:145810:43)",
+                "diff": null
+              },
+              "uuid": "263448e8-33fe-453c-a874-8cb9d13de14d",
+              "parentUUID": "7b4c2ef9-a520-4b38-a0ab-c5b9546307dd",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Should validate invalid phone number",
+              "fullTitle": "Tutor Onboarding - Contact Details (Negative) Should validate invalid phone number",
+              "timedOut": null,
+              "duration": 5343,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": "[\n  {\n    \"title\": \"cypress-mochawesome-reporter-videos-failed\",\n    \"value\": \"cypress\\\\e2e\\\\tutor\\\\contactDetails_negative.cy.js\"\n  },\n  {\n    \"title\": \"cypress-mochawesome-reporter-screenshots\",\n    \"value\": [\n      [\n        \"\\\\contactDetails_negative.cy.js\\\\Tutor Onboarding - Contact Details (Negative) -- Should validate invalid phone number (failed)-1765431885087.png\"\n      ]\n    ]\n  }\n]",
+              "code": "cy.selectCountry('India');\ncy.enterZipCode('560001');\ncy.enterPhone('123');\ncy.clickNext();\ncy.contains('Enter valid phone number').should('be.visible');",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `button[data-testid=\"rfs-btn\"]`, but never found it.",
+                "estack": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `button[data-testid=\"rfs-btn\"]`, but never found it.\n    at Context.eval (webpack://tutorsvalley-automation/./cypress/support/commands.js:160:7)\n    at wrapped (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:145810:43)",
+                "diff": null
+              },
+              "uuid": "398fa5c9-925d-4782-a914-a758b6052b49",
+              "parentUUID": "7b4c2ef9-a520-4b38-a0ab-c5b9546307dd",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "f60b340c-b9f1-4d43-9696-07c61a932716",
+            "263448e8-33fe-453c-a874-8cb9d13de14d",
+            "398fa5c9-925d-4782-a914-a758b6052b49"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 20821,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress\\reports\\mochawesome\\.jsons",
+        "charts": true,
+        "reportPageTitle": "TutorsValley Automation Report",
+        "embeddedScreenshots": true,
+        "inlineAssets": true,
+        "saveJson": true,
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.3.2"
+    }
+  }
+}

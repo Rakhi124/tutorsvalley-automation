@@ -1,0 +1,114 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 0,
+    "pending": 0,
+    "failures": 1,
+    "start": "2025-12-11T05:44:48.956Z",
+    "end": "2025-12-11T05:44:53.087Z",
+    "duration": 4131,
+    "testsRegistered": 1,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "9807918a-6c5f-445a-a729-c8ca75f68c69",
+      "title": "",
+      "fullFile": "cypress\\e2e\\tutor\\contactDetails_positive.cy.js",
+      "file": "cypress\\e2e\\tutor\\contactDetails_positive.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "b96c7b00-2308-485d-8516-5443d45e2c6c",
+          "title": "Tutor Onboarding - Contact Details (Positive)",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Should complete Contact Details with auto-fill",
+              "fullTitle": "Tutor Onboarding - Contact Details (Positive) Should complete Contact Details with auto-fill",
+              "timedOut": null,
+              "duration": 3934,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": "[\n  {\n    \"title\": \"cypress-mochawesome-reporter-videos-failed\",\n    \"value\": \"cypress\\\\e2e\\\\tutor\\\\contactDetails_positive.cy.js\"\n  },\n  {\n    \"title\": \"cypress-mochawesome-reporter-screenshots\",\n    \"value\": [\n      [\n        \"\\\\contactDetails_positive.cy.js\\\\Tutor Onboarding - Contact Details (Positive) -- Should complete Contact Details with auto-fill (failed)-1765431892837.png\"\n      ]\n    ]\n  }\n]",
+              "code": "cy.cy.fillContactDetails(_tutorData.default);\ncy.clickNext();\ncy.url().should('include', '/onboarding/select-courses');",
+              "err": {
+                "message": "TypeError: Cannot read properties of undefined (reading 'fillContactDetails')",
+                "estack": "TypeError: Cannot read properties of undefined (reading 'fillContactDetails')\n    at Context.eval (webpack://tutorsvalley-automation/./cypress/e2e/tutor/contactDetails_positive.cy.js:12:11)\n    at runnable.fn (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:146091:19)\n    at callFn (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:165185:21)\n    at Runnable.run (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:165172:7)\n    at <unknown> (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:171267:30)\n    at PassThroughHandlerContext.finallyHandler (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:4042:23)\n    at PassThroughHandlerContext.tryCatcher (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:1777:23)\n    at Promise._settlePromiseFromHandler (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:1489:31)\n    at Promise._settlePromise (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:1546:18)",
+                "diff": null
+              },
+              "uuid": "908fb83a-5772-42b9-80f7-630a2b749209",
+              "parentUUID": "b96c7b00-2308-485d-8516-5443d45e2c6c",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "908fb83a-5772-42b9-80f7-630a2b749209"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 3934,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress\\reports\\mochawesome\\.jsons",
+        "charts": true,
+        "reportPageTitle": "TutorsValley Automation Report",
+        "embeddedScreenshots": true,
+        "inlineAssets": true,
+        "saveJson": true,
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.3.2"
+    }
+  }
+}
