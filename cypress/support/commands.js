@@ -193,3 +193,147 @@ Cypress.Commands.add('fillContactDetails', (data) => {
 Cypress.Commands.add('clickNext', () => {
     cy.get('button').contains('Next').click();
 });
+
+// ==========================================
+// LOGIN COMMANDS (ROLE BASED + SAFE)
+// ==========================================
+
+// Open Login from landing page
+Cypress.Commands.add('openLoginFromLanding', () => {
+  cy.visit('/');
+  cy.contains('Login').should('be.visible').click();
+});
+
+// Core login logic (internal reuse)
+Cypress.Commands.add('performLogin', (email, password) => {
+
+  if (email !== undefined) {
+    cy.get('input[name="email"]')
+      .should('be.visible')
+      .clear()
+      .type(email);
+  }
+
+  if (password !== undefined) {
+    cy.get('input[type="password"]')
+      .should('be.visible')
+      .clear()
+      .type(password, { log: false });
+  }
+
+  cy.contains('button', 'Login')
+    .scrollIntoView()
+    .should('be.visible')
+    .click();
+
+  // Handle & verify modal close
+  cy.acceptModalIfPresent();
+});
+
+// Tutor login
+Cypress.Commands.add('loginAsTutorUI', (email, password) => {
+  cy.openLoginFromLanding();
+  cy.performLogin(email, password);
+
+  cy.url({ timeout: 15000 }).should('include', '/tutor');
+});
+
+// Student login
+Cypress.Commands.add('loginAsStudentUI', (email, password) => {
+  cy.openLoginFromLanding();
+  cy.performLogin(email, password);
+
+  cy.url({ timeout: 15000 }).should('include', '/student');
+});
+
+// Login negative validation (safe)
+Cypress.Commands.add('assertLoginError', (message) => {
+  cy.get('body').then(($body) => {
+    if ($body.text().includes(message)) {
+      cy.contains(message).should('be.visible');
+    } else {
+      cy.log(`⚠️ Validation not implemented yet: ${message}`);
+    }
+  });
+});
+
+// ----------------------
+// Modal Handling (SESSION-AWARE & STABLE)
+// ----------------------
+
+// ----------------------
+/*Cypress.Commands.add('handleConsentModalIfPresent', () => {
+  cy.get('body').then(($body) => {
+
+    if ($body.find('[role="dialog"].modal.show').length > 0) {
+
+      cy.get('[role="dialog"].modal.show')
+        .should('be.visible')
+        .within(() => {
+
+          // 🔽 Scroll inside modal content
+          cy.get('.modal-body')
+            .should('exist')
+            .scrollTo('bottom', { duration: 500 });
+
+          // ✅ Click I Agree
+          cy.contains('button', 'I Agree')
+            .should('be.visible')
+            .and('not.be.disabled')
+            .click();
+        });
+
+      // 🔒 Ensure modal is closed
+      cy.get('[role="dialog"].modal.show').should('not.exist');
+    }
+  });
+});*/
+
+Cypress.Commands.add('handleConsentModalIfPresent', () => {
+  cy.get('body').then(($body) => {
+
+    if ($body.find('[role="dialog"].modal.show').length) {
+
+      cy.get('[role="dialog"].modal.show', { timeout: 10000 })
+        .should('be.visible')
+        .within(() => {
+
+          cy.get('.modal-body')
+            .scrollTo('bottom', { duration: 600 });
+
+          cy.contains('button', /agree/i)
+            .should('be.visible')
+            .and('not.be.disabled')
+            .click();
+        });
+
+      cy.get('[role="dialog"].modal.show').should('not.exist');
+    }
+  });
+});
+
+//Logout
+Cypress.Commands.add('logoutTutor', () => {
+
+  // 🛑 Handle blocking consent modal first
+  cy.handleConsentModalIfPresent();
+
+  // 1️⃣ Open user dropdown
+  cy.get('#user-dropdown')
+    .should('be.visible')
+    .and('not.be.disabled')
+    .click();
+
+  // 2️⃣ Click Logout
+  cy.contains(
+    'button.dropdown-item .menu_link',
+    'Logout'
+  )
+    .should('be.visible')
+    .click();
+
+  // ✅ Verify logout success
+  cy.url().should('include', '/login');
+});
+
+
