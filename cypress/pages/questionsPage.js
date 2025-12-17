@@ -1,9 +1,18 @@
 // cypress/pages/questionsPage.js
 import questionData from '../fixtures/question.json'
-
+import tutor from '../fixtures/tutorCredentials.json'
 export function createQuestion() {
   const questionText = questionData.questionText
   const topicText = questionData.topicText
+
+  cy.loginAsTutorUI(tutor.email,tutor.password);
+ 
+     cy.verifyToken();
+ 
+    // ===== Without Logout (same session) =====
+    cy.visit('/tutor');
+    cy.handleConsentModalIfPresent();
+ 
 
   // expose for later use
   cy.wrap(questionText).as('questionText')

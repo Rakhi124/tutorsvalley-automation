@@ -6,31 +6,15 @@ import {
  
 describe('Tutor Create Questions Flow', () => {
  
-  before(() => {
-    cy.clearAppData();
+  // before(() => {
+  //   cy.clearAppData();
  
-    // Load login data from fixture and login
-    cy.fixture('loginData').then((data) => {
-   cy.loginTutorUI(data.tutor.email, data.tutor.password);
-   cy.acceptModalIfPresent();
+  //   // Load login data from fixture and login
+  //   cy.fixture('loginData').then((data) => {
+  //  cy.loginAsTutorUI(data.tutor.email, data.tutor.password);
 
-
-
- /*
-      // Handle modal after login
-      cy.get('body').then(($body) => {
-        if ($body.find('button:contains("I Agree")').length > 0) {
-            cy.contains('button', 'I Agree')
-            .scrollIntoView()       // scroll before clicking
-            .should('be.visible')
-            .click({ force: true });
-        }
-      });*/
- 
-      // Confirm dashboard loaded
-      //cy.url().should('include', '/tutor'); // replace with real dashboard path if needed
-    });
-  });
+  //   });
+  // });
  
 
   it('should create, edit and delete a question', () => {
