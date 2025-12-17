@@ -1,0 +1,16 @@
+{
+  "questionText": "I ___ a blue pen.123?",
+  "updatedSuffix": " - updated",
+  "topicText": "cypress",
+  "options": {
+    "A": "has",
+    "B": "have",
+    "C": "having",
+    "D": "had"
+  },
+  "messages": {
+    "create": "Question added successfully!",
+    "edit": "Question edited successfully!",
+    "delete": "Question deleted successfully!"
+  }
+}
