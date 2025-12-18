@@ -4,25 +4,19 @@
   "description": "TutorsValley Cypress Automation Framework",
   "main": "index.js",
   "type": "commonjs",
-
   "scripts": {
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
-
     "report:mocha:merge": "mochawesome-merge cypress/reports/mochawesome/.jsons/*.json > cypress/reports/mochawesome/merged.json",
     "report:mocha:generate": "marge cypress/reports/mochawesome/merged.json -f index -o cypress/reports/mochawesome",
     "report:mocha": "npm run report:mocha:merge && npm run report:mocha:generate",
-
     "report:allure:generate": "allure generate allure-results --clean",
     "report:allure:open": "allure open",
-
     "test:full": "cypress run && npm run report:mocha && npm run report:allure:generate"
   },
-
   "keywords": [],
   "author": "",
   "license": "ISC",
-
   "devDependencies": {
     "@cypress/webpack-preprocessor": "^7.0.2",
     "@shelex/cypress-allure-plugin": "^2.41.2",

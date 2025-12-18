@@ -40,6 +40,38 @@ Cypress.Commands.add('loginTutorUI', (email, password) => {
   cy.url({ timeout: 15000 }).should('include', '/tutor');
 });
 
+// Student Login with Valid Credentails
+Cypress.Commands.add('studentLogin', (email, password, firstname, lastname) => {
+
+
+  cy.visit('/login');
+
+  // Intercept login API
+  cy.intercept('POST', '/api/v1/login').as('studentLogin')
+
+  cy.get('input[name="email"]').type(email); // Type email
+  cy.wait(1000);
+  cy.get('input[name="password"]').type(password); // Type password
+  cy.wait(1000);
+  cy.get('div.mb-4 > button').contains('Login').scrollIntoView().click();
+
+   // Waits until the 'studentLogin' request completes
+  cy.wait('@studentLogin')
+  .its('response.statusCode')
+  .should('eq', 200)
+
+  cy.url().should('include', '/student'); // Assert redirection to dashboard
+  cy.wait(1000);
+  cy.get('div.modal-body > div > p:nth-child(1)').should('have.text',"Dear Student,"); // Assert agree page
+  cy.wait(1000);
+
+  // Handle auto popup/modal after login
+  cy.acceptModalIfPresent();
+  cy.get('.modal-dialog modal-md').should('not.exist'); // Assert the modal element does not exist in the DOM
+  cy.get('div.tutor-name-section > h4 > span').should('have.text', firstname + ' '  + lastname);
+  cy.wait(1000);
+});
+
 // Optional: Admin Login
 Cypress.Commands.add('loginAdmin', (username, password) => {
   cy.visit(Cypress.env('adminUrl'));
