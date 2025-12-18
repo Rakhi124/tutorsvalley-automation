@@ -73,11 +73,11 @@ module.exports = defineConfig({
         console.log("📊 Generating Mochawesome HTML...");
         exec(
           'npx mochawesome-report-generator cypress/reports/mochawesome/*.json -o cypress/reports/mochawesome',
-          () => {}
+          () => { }
         );
 
         console.log("📑 Generating Allure HTML...");
-        exec('allure generate allure-results --clean', () => {});
+        exec('allure generate allure-results --clean', () => { });
       });
 
       return config;

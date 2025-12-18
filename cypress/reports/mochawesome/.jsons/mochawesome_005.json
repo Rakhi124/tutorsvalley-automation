@@ -1,0 +1,210 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 0,
+    "pending": 0,
+    "failures": 1,
+    "start": "2025-12-12T12:18:09.718Z",
+    "end": "2025-12-12T12:18:32.842Z",
+    "duration": 23124,
+    "testsRegistered": 6,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 5,
+    "hasSkipped": true
+  },
+  "results": [
+    {
+      "uuid": "7358ea24-a1e3-41ca-ac8b-028c083bbef4",
+      "title": "",
+      "fullFile": "cypress\\e2e\\filter\\Valid_TC_filter.cy.js",
+      "file": "cypress\\e2e\\filter\\Valid_TC_filter.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "dfe94d4b-269d-44b5-95c0-2e44c1ff7a07",
+          "title": "Tutor Search – Dynamic Filter Validation",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC-001: Verify initial tutor page loads with all filters visible",
+              "fullTitle": "Tutor Search – Dynamic Filter Validation TC-001: Verify initial tutor page loads with all filters visible",
+              "timedOut": null,
+              "duration": 22573,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": "[\n  {\n    \"title\": \"cypress-mochawesome-reporter-videos-failed\",\n    \"value\": \"cypress\\\\e2e\\\\filter\\\\Valid_TC_filter.cy.js\"\n  },\n  {\n    \"title\": \"cypress-mochawesome-reporter-screenshots\",\n    \"value\": [\n      [\n        \"\\\\Valid_TC_filter.cy.js\\\\Tutor Search – Dynamic Filter Validation -- TC-001 Verify initial tutor page loads with all filters visible -- before each hook (failed)-1765541912238.png\"\n      ]\n    ]\n  }\n]",
+              "code": "// Assert all dropdowns are visible with timeouts\ncy.get(LEVEL_DROPDOWN, {\n  timeout: 10000\n}).should(\"be.visible\").then(() => cy.log(\"✅ Level dropdown found\"));\ncy.get(SUBJECT_DROPDOWN, {\n  timeout: 10000\n}).should(\"be.visible\").then(() => cy.log(\"✅ Subject dropdown found\"));\ncy.get(GENDER_DROPDOWN, {\n  timeout: 10000\n}).should(\"be.visible\").then(() => cy.log(\"✅ Gender dropdown found\"));\n// Check for tutors with flexible selectors\ncy.get(\"body\").then($body => {\n  let tutorCards = $body.find(TUTOR_CARD);\n  if (tutorCards.length === 0) {\n    // Try alternative selectors\n    const alternatives = [\".tutor-card\", \"[class*='tutor'][class*='card']\"];\n    for (let alt of alternatives) {\n      tutorCards = $body.find(alt);\n      if (tutorCards.length > 0) break;\n    }\n  }\n  const count = tutorCards.length;\n  cy.log(`✅ Page loaded with ${count} tutor cards`);\n});\n// Verify result message displays\ncy.get(\"body\").then($body => {\n  const resultMsg = $body.text().includes(\"We Found\");\n  if (resultMsg) {\n    cy.log(\"✅ Result message found\");\n  } else {\n    cy.log(\"⚠️ Result message not found, but continuing test\");\n  }\n});\ncy.log(\"✅ TC-001 PASSED: Initial page state verified\");",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 15000ms: expected 'https://beta.tutorsvalley.com/login' to include '/tutor'\n\nBecause this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `Tutor Search – Dynamic Filt...`",
+                "estack": "AssertionError: Timed out retrying after 15000ms: expected 'https://beta.tutorsvalley.com/login' to include '/tutor'\n\nBecause this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `Tutor Search – Dynamic Filt...`\n    at Context.eval (webpack://tutorsvalley-automation/./cypress/support/commands.js:40:29)\n    at wrapped (https://beta.tutorsvalley.com/__cypress/runner/cypress_runner.js:145810:43)",
+                "diff": null
+              },
+              "uuid": "d6513300-ddfc-4c95-8b04-36c0cfcac4e7",
+              "parentUUID": "dfe94d4b-269d-44b5-95c0-2e44c1ff7a07",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC-002: Verify filtering by Level reduces result count",
+              "fullTitle": "Tutor Search – Dynamic Filter Validation TC-002: Verify filtering by Level reduces result count",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "getDropdownOptions(LEVEL_DROPDOWN).then(levels => {\n  if (levels.length === 0) {\n    cy.log(\"⚠️ No levels available to test\");\n    return;\n  }\n  const testLevel = levels[0];\n  cy.log(`Testing Level: ${testLevel.text}`);\n  // Intercept both the courses endpoint (populates subjects) and the tutors endpoint\n  cy.intercept('GET', COURSES_API).as('getCourses');\n  cy.intercept('GET', TUTOR_API).as('getFilteredTutors');\n  // Make the selection that triggers dependent requests\n  safeSelect(LEVEL_DROPDOWN, testLevel);\n  // Wait for the courses/subjects request to finish (subject dropdown population)\n  cy.wait('@getCourses', {\n    timeout: 10000\n  }).then(() => cy.log('✅ Courses loaded after level selection'), () => cy.log('⚠️ Courses request timed out, continuing'));\n  // Ensure subject dropdown is populated (fallback if network alias missed)\n  waitForDropdownPopulated(SUBJECT_DROPDOWN).then(() => {}, () => {\n    cy.log('⚠️ Subject dropdown did not populate in time');\n  });\n  // Verify selection\n  verifyDropdownSelection(LEVEL_DROPDOWN, testLevel.value);\n  // Wait for tutor results to change (DOM-based) instead of relying solely on network alias\n  waitForTutorResultsChange(initialTutorCount, 12000).then(newCount => {\n    if (newCount !== initialTutorCount) {\n      cy.log(`✅ Tutors updated after filters: ${initialTutorCount} → ${newCount}`);\n    } else {\n      cy.log('⚠️ No tutor count change observed after level selection, continuing');\n    }\n  });\n  // Verify results - use flexible selector helper\n  getTutorCards().then($cards => {\n    const filteredCount = $cards.length;\n    if (filteredCount > 0) {\n      expect(filteredCount).to.be.at.most(initialTutorCount, \"Filtered results should be <= initial count\");\n      cy.log(`✅ Level filter works: ${initialTutorCount} → ${filteredCount} tutors`);\n    } else {\n      cy.log(`⚠️ No tutor cards found after filtering`);\n    }\n  });\n});\ncy.log(\"✅ TC-002 PASSED: Level filter verification complete\");",
+              "err": {},
+              "uuid": "272e8f4b-ab7e-4852-bab8-5ae8c973b781",
+              "parentUUID": "dfe94d4b-269d-44b5-95c0-2e44c1ff7a07",
+              "isHook": false,
+              "skipped": true
+            },
+            {
+              "title": "TC-003: Verify Subject filter updates based on Level selection",
+              "fullTitle": "Tutor Search – Dynamic Filter Validation TC-003: Verify Subject filter updates based on Level selection",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "getDropdownOptions(LEVEL_DROPDOWN).then(levels => {\n  if (levels.length === 0) return;\n  const testLevel = levels[0];\n  // Intercept courses endpoint (level -> subjects) and wait for it\n  cy.intercept('GET', COURSES_API).as('getAfterLevelCourses');\n  safeSelect(LEVEL_DROPDOWN, testLevel);\n  cy.wait('@getAfterLevelCourses', {\n    timeout: 10000\n  }).then(() => cy.log('✅ Courses loaded after level selection'), () => cy.log('⚠️ Courses request timed out, continuing'));\n  waitForDropdownPopulated(SUBJECT_DROPDOWN).then(() => {}, () => cy.log('⚠️ Subject dropdown did not populate'));\n  getDropdownOptions(SUBJECT_DROPDOWN).then(subjects => {\n    expect(subjects.length).to.be.greaterThan(0, \"Level should have available subjects\");\n    cy.log(`✅ Level \"${testLevel.text}\" has ${subjects.length} subjects`);\n    const testSubject = subjects[0];\n    // Selecting a subject may trigger the tutors API; intercept it\n    cy.intercept('GET', TUTOR_API).as('getAfterSubjectTutors');\n    safeSelect(SUBJECT_DROPDOWN, testSubject);\n    waitForDropdownPopulated(SUBJECT_DROPDOWN).then(() => {}, () => {});\n    verifyDropdownSelection(SUBJECT_DROPDOWN, testSubject.value);\n    cy.wait('@getAfterSubjectTutors', {\n      timeout: 10000\n    }).then(() => cy.log('✅ Tutors API called after subject selection'), () => cy.log('ℹ️ No tutors API call observed after subject selection'));\n    cy.wait(500);\n    cy.log(`✅ Subject filter works for: ${testLevel.text} → ${testSubject.text}`);\n  });\n});\ncy.log(\"✅ TC-003 PASSED: Subject filter verification complete\");",
+              "err": {},
+              "uuid": "dc42c04d-779b-4423-a012-7039c146334f",
+              "parentUUID": "dfe94d4b-269d-44b5-95c0-2e44c1ff7a07",
+              "isHook": false,
+              "skipped": true
+            },
+            {
+              "title": "TC-004: Verify Gender filter works independently",
+              "fullTitle": "Tutor Search – Dynamic Filter Validation TC-004: Verify Gender filter works independently",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "getDropdownOptions(LEVEL_DROPDOWN).then(levels => {\n  if (levels.length === 0) return;\n  const testLevel = levels[0];\n  // Intercept courses endpoint (level -> subjects) instead of tutors API\n  cy.intercept('GET', COURSES_API).as('getAfterLevel4Courses');\n  safeSelect(LEVEL_DROPDOWN, testLevel);\n  // Wait for courses/subjects population\n  cy.wait('@getAfterLevel4Courses', {\n    timeout: 10000\n  }).then(() => cy.log('✅ Courses loaded after level selection'), () => cy.log('⚠️ Courses request timed out, continuing'));\n  // Ensure subject dropdown is populated before continuing\n  waitForDropdownPopulated(SUBJECT_DROPDOWN).then(() => {}, () => cy.log('⚠️ Subject dropdown did not populate'));\n  getDropdownOptions(SUBJECT_DROPDOWN).then(subjects => {\n    if (subjects.length === 0) return;\n    const testSubject = subjects[0];\n    // Intercept tutors API when selecting subject\n    cy.intercept('GET', TUTOR_API).as('getAfterSubject4Tutors');\n    safeSelect(SUBJECT_DROPDOWN, testSubject);\n    // Wait for the tutors API or fall back to global alias\n    cy.wait('@getAfterSubject4Tutors', {\n      timeout: 4000\n    }).then(() => cy.log('✅ Tutors API called after subject selection'), () => {\n      cy.log('⚠️ Local tutors alias not observed; falling back to global alias');\n      cy.wait('@getTutors', {\n        timeout: 12000\n      }).then(() => cy.log('✅ Tutors API (global) observed after subject selection'), () => cy.log('ℹ️ No tutors API observed after subject selection'));\n    });\n    cy.wait(1500);\n    getDropdownOptions(GENDER_DROPDOWN).then(genders => {\n      expect(genders.length).to.be.greaterThan(0, \"Should have gender options\");\n      const testGender = genders[0];\n      cy.intercept(\"GET\", TUTOR_API).as(\"getAfterGender\");\n      safeSelect(GENDER_DROPDOWN, testGender);\n      cy.wait(1000);\n      verifyDropdownSelection(GENDER_DROPDOWN, testGender.value);\n      cy.wait(\"@getAfterGender\", {\n        timeout: 8000\n      }).then(() => cy.log(\"✅ API after gender\"), () => cy.log(\"⚠️ API timeout, continuing\"));\n      cy.wait(500);\n      cy.log(`✅ All filters applied: ${testLevel.text} × ${testSubject.text} × ${testGender.text}`);\n    });\n  });\n});\ncy.log(\"✅ TC-004 PASSED: Gender filter verification complete\");",
+              "err": {},
+              "uuid": "391c6d18-e7cc-4db0-9311-fd119e185618",
+              "parentUUID": "dfe94d4b-269d-44b5-95c0-2e44c1ff7a07",
+              "isHook": false,
+              "skipped": true
+            },
+            {
+              "title": "TC-005: Test multiple filter combinations",
+              "fullTitle": "Tutor Search – Dynamic Filter Validation TC-005: Test multiple filter combinations",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "getDropdownOptions(LEVEL_DROPDOWN).then(levels => {\n  const topLevels = levels.slice(0, 2); // Test 2 levels\n  cy.log(`🎯 Testing ${topLevels.length} Levels with different subjects and genders`);\n  getDropdownOptions(GENDER_DROPDOWN).then(allGenders => {\n    const testGenders = allGenders.slice(0, 1); // Test 1 gender per combination\n    topLevels.forEach(level => {\n      cy.log(`\\n📍 Testing Level: ${level.text}`);\n      safeSelect(LEVEL_DROPDOWN, level);\n      cy.wait(1500);\n      getDropdownOptions(SUBJECT_DROPDOWN).then(subjects => {\n        const testSubjects = subjects.slice(0, 2); // Test 2 subjects per level\n        cy.log(`  📚 Subjects available: ${subjects.length}`);\n        testSubjects.forEach(subject => {\n          testGenders.forEach(gender => {\n            testFilterCombination(level, subject, gender);\n          });\n        });\n      });\n    });\n  });\n});\ncy.log(\"✅ TC-005 PASSED: Multiple filter combinations verified\");",
+              "err": {},
+              "uuid": "dc38420b-95e7-48cb-bb90-f12c52347875",
+              "parentUUID": "dfe94d4b-269d-44b5-95c0-2e44c1ff7a07",
+              "isHook": false,
+              "skipped": true
+            },
+            {
+              "title": "TC-006: Verify filters can be changed and results update",
+              "fullTitle": "Tutor Search – Dynamic Filter Validation TC-006: Verify filters can be changed and results update",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "getDropdownOptions(LEVEL_DROPDOWN).then(levels => {\n  if (levels.length < 2) {\n    cy.log(\"⚠️ Need at least 2 levels for this test\");\n    return;\n  }\n  // First filter combination\n  const level1 = levels[0];\n  safeSelect(LEVEL_DROPDOWN, level1);\n  cy.wait(1000);\n  getTutorCards().then($cardsFirst => {\n    const count1 = $cardsFirst.length;\n    cy.log(`First filter: ${count1} tutors`);\n    // Change to different level and wait for tutor count to change\n    const level2 = levels[1];\n    safeSelect(LEVEL_DROPDOWN, level2);\n    cy.wait(1500);\n    // Wait for tutor results to change (DOM-based polling)\n    waitForTutorResultsChange(count1, 12000).then(count2 => {\n      cy.log(`Second filter: ${count2} tutors`);\n      // Results may be zero or differ from initial count (filter changed successfully)\n      cy.log(`✅ Filter change successful: ${level1.text} → ${level2.text} (${count1} → ${count2} tutors)`);\n    });\n  });\n});\ncy.log(\"✅ TC-006 PASSED: Filter change verification complete\");",
+              "err": {},
+              "uuid": "e24cf178-2f7b-41a2-83df-8399c319706a",
+              "parentUUID": "dfe94d4b-269d-44b5-95c0-2e44c1ff7a07",
+              "isHook": false,
+              "skipped": true
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "d6513300-ddfc-4c95-8b04-36c0cfcac4e7"
+          ],
+          "pending": [],
+          "skipped": [
+            "272e8f4b-ab7e-4852-bab8-5ae8c973b781",
+            "dc42c04d-779b-4423-a012-7039c146334f",
+            "391c6d18-e7cc-4db0-9311-fd119e185618",
+            "dc38420b-95e7-48cb-bb90-f12c52347875",
+            "e24cf178-2f7b-41a2-83df-8399c319706a"
+          ],
+          "duration": 22573,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress\\reports\\mochawesome\\.jsons",
+        "charts": true,
+        "reportPageTitle": "TutorsValley Automation Report",
+        "embeddedScreenshots": true,
+        "inlineAssets": true,
+        "saveJson": true,
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.3.2"
+    }
+  }
+}
