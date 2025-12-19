@@ -1,0 +1,7 @@
+[
+    { "name":"sample-homework_3" , "value":"cypress/fixtures/docs/sample-homework_3.pdf"},
+    { "name":"sample-homework_150kB" , "value":"cypress/fixtures/docs/sample-homework_150kB.pdf"},
+    { "name":"sample-homework-2" , "value":"cypress/fixtures/docs/sample-homework-2.pdf"}
+]
+
+

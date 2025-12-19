@@ -1,0 +1,8 @@
+[
+    {
+      "name": "long attachment test" ,
+      "description": "long attachment test",
+      "file": ["cypress/fixtures/docs/1-sample.pdf", "cypress/fixtures/docs/2-sample.pdf", "cypress/fixtures/docs/3-sample.pdf"]
+    }
+  ]
+

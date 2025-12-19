@@ -1,0 +1,8 @@
+{
+    "pdf": "cypress/fixtures/pdf/sample-homework_150kB.pdf",
+    "mp4": "cypress/fixtures/videos/sample.mp4",
+    "doc": "cypress/fixtures/docs/sample.docx",
+    "docx": "cypress/fixtures/docs/sample2.docx",
+    "xls": "cypress/fixtures/docs/sample1.xls",
+    "xlsx": "cypress/fixtures/docs/sample2.xlsx"
+}
