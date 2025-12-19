@@ -1,22 +1,27 @@
-import studentLoginPage from "../../pages/studentLoginPage";
+import studentLoginPage from "../../pages/studentLoginPage"
+import negativecreds from "../../fixtures/studentCredentials.json";
 
 describe('Student Login - Negative testcases', () => {
-   // let userData;
      
-     before(() => {
-        cy.visit('/login');
-         cy.fixture('studentCredentials').then((userData) => {
-         //userData = creds.wrongCredentials});
+     beforeEach(() => {
+         cy.visit('/login');
          cy.clearAppData()
         
-     })
-    
-     userData.wrongCredentials.forEach((creds) => {
-       it('Student Login (Negative testcase)', function () 
+     }) 
+   
+    // Wrong Credential Login
+    negativecreds.wrongCredentials.forEach((cred) => {
+       it(cred.Description, function () 
        {
-        studentLoginPage.wrongcredlogin(creds.email, creds.password, creds.errorMessage) //Wrong credentials login 
-       //cy.studentLogin(creds.email, creds.password);
+        studentLoginPage.wrongcredlogin(cred)  // Wrong Credential Login
      })});
+
+    //Invalid credentials login 
+     negativecreds.invalidCredentials.forEach((cred) => {
+        it(cred.Description, function () 
+        {
+         studentLoginPage.invalidcredlogin(cred) //Invalid credentials login 
+      })}); 
     
-   });
+   
 });
