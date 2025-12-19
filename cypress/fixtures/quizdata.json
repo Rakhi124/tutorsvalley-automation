@@ -1,0 +1,20 @@
+{
+  "validDate": {
+    "day": 19,
+    "month": "December",
+    "year": 2025
+  },
+  "invalidDate": {
+    "day": 9,
+    "month": "December",
+    "year": 2025
+  },
+  "validSearch": "New Tutor IQ",
+  "invalidSearch": "xyz123InvalidQuizName",
+  "studentName": "Test Testing",
+  
+  "quizTitle1": "Student Level Quiz",
+  "quizTitle2": "New Tutor IQ"
+
+
+}
